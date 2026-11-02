@@ -5,7 +5,7 @@ A inventory dashboard built with **Express.js**, **SQLite** (Node built-in `node
 ## Quick start
 
 ```bash
-cd laptop-inventory-management
+cd crud
 npm install
 cp .env.example .env        # Windows: copy .env.example .env
 # edit .env and set SESSION_SECRET to a long random string
