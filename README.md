@@ -1,6 +1,6 @@
 # Laptop Inventory Management
 
-A full-stack inventory dashboard built with **Express.js**, **SQLite** (Node built-in `node:sqlite`), vanilla HTML/CSS/JS, Chart.js and Lucide icons.
+A inventory dashboard built with **Express.js**, **SQLite** (Node built-in `node:sqlite`), vanilla HTML/CSS/JS, Chart.js and Lucide icons.
 
 ## Quick start
 
