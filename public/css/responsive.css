@@ -1,0 +1,48 @@
+/* Responsive adjustments */
+@media (max-width: 1280px) {
+  .stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 1100px) {
+  .grid-2, .grid-2.even { grid-template-columns: 1fr; }
+  .topbar-date { display: none; }
+}
+@media (max-width: 900px) {
+  /* Sidebar becomes a slide-out drawer */
+  .sidebar { transform: translateX(-100%); width: var(--sidebar-w) !important; box-shadow: var(--shadow-lg); }
+  body.drawer-open .sidebar { transform: none; }
+  body.drawer-open .sidebar-backdrop { opacity: 1; pointer-events: auto; }
+  body.drawer-open { overflow: hidden; }
+  .sidebar-toggle { display: none; }
+  .content-wrap, body.sidebar-collapsed .content-wrap { margin-left: 0; }
+  /* ignore desktop "collapsed" look inside the drawer */
+  body.sidebar-collapsed .brand-text, body.sidebar-collapsed .nav-label,
+  body.sidebar-collapsed .sidebar-profile .meta, body.sidebar-collapsed .sidebar-profile > svg { opacity: 1; width: auto; pointer-events: auto; }
+  body.sidebar-collapsed .nav-link { padding: 0 14px; justify-content: flex-start; gap: 12px; }
+  body.sidebar-collapsed .nav-link .nav-label { display: inline; }
+  body.sidebar-collapsed .sidebar-profile { padding: 10px; margin: 12px; justify-content: flex-start; gap: 12px; }
+  body.sidebar-collapsed .nav-link[data-tooltip]:hover::after { display: none; }
+  .menu-btn { display: grid; }
+  .topbar { padding: 0 14px; gap: 6px; }
+  .page { padding: 20px 14px; }
+  .settings-section { grid-template-columns: 1fr; gap: 14px; padding: 18px; }
+}
+@media (max-width: 720px) {
+  .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .user-trigger .meta { display: none; }
+  .topbar-search input { width: 40px; padding: 0; cursor: pointer; }
+  .topbar-search input::placeholder { color: transparent; }
+  .topbar-search input:focus { width: min(62vw, 260px); padding: 0 14px 0 38px; cursor: text; position: absolute; right: 0; z-index: 5; }
+  .form-grid, .detail-grid, .info-list { grid-template-columns: 1fr; }
+  .summary-grid { grid-template-columns: 1fr; }
+  .notif-menu { position: fixed; top: calc(var(--topbar-h) + 6px); left: 10px; right: 10px; width: auto; }
+  .toolbar .select { flex: 1 1 140px; }
+  .modal-overlay { padding: 10px; }
+  .modal-body { padding: 16px; }
+  .modal-head, .modal-foot { padding-left: 16px; padding-right: 16px; }
+  .detail-hero { flex-direction: column; align-items: flex-start; }
+  .page-head h1 { font-size: 21px; }
+}
+@media (max-width: 440px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .modal-foot .btn { flex: 1; }
+}

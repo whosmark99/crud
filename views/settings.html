@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Settings · Laptop Inventory Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>try{var t=localStorage.getItem('theme')||'light';if(t==='system')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563EB'/%3E%3Cpath d='M9 10h14v9H9z M6 22h20' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body data-page="settings">
+  <main id="page" class="page">
+    <div class="page-head"><div><h1>Settings</h1><p>Manage the application, your appearance and your account.</p></div></div>
+    <section class="card" style="max-width:960px">
+      <div class="settings-section">
+        <div><h3>Application</h3><p class="desc">Shown in the sidebar and used to format prices.</p></div>
+        <form id="app-settings-form" novalidate>
+          <p class="field-hint" id="admin-note" hidden style="margin-bottom:12px">Only administrators can change these settings.</p>
+          <div class="form-grid">
+            <div class="field"><label for="company_name">Organization name</label><input class="input" id="company_name" name="company_name" maxlength="80"><div class="field-error"></div></div>
+            <div class="field"><label for="currency">Currency symbol</label><input class="input" id="currency" name="currency" maxlength="4" placeholder="₱"><div class="field-error"></div></div>
+          </div>
+          <div class="form-actions"><button type="submit" class="btn btn-primary">Save settings</button></div>
+        </form>
+      </div>
+
+      <div class="settings-section">
+        <div><h3>Theme preferences</h3><p class="desc">Your choice is remembered on this device.</p></div>
+        <div>
+          <div class="segmented" id="theme-seg">
+            <button data-theme="light"><i data-lucide="sun"></i> Light</button>
+            <button data-theme="dark"><i data-lucide="moon"></i> Dark</button>
+            <button data-theme="system"><i data-lucide="monitor"></i> System</button>
+          </div>
+          <div style="display:grid;gap:14px;margin-top:20px;max-width:360px">
+            <div class="field"><label for="pref-rows">Rows per page in inventory</label>
+              <select class="select" id="pref-rows"><option>10</option><option>25</option><option>50</option><option>100</option></select></div>
+            <label class="checkbox"><input type="checkbox" id="pref-sidebar"> Keep the sidebar collapsed</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div><h3>Profile</h3><p class="desc">Your name, username and email.</p></div>
+        <form id="profile-form" novalidate>
+          <div class="form-grid">
+            <div class="field full"><label for="full_name">Full name</label><input class="input" id="full_name" name="full_name" maxlength="80"><div class="field-error"></div></div>
+            <div class="field"><label for="username">Username</label><input class="input" id="username" name="username" maxlength="30"><div class="field-error"></div></div>
+            <div class="field"><label for="email">Email</label><input class="input" id="email" name="email" type="email" maxlength="120"><div class="field-error"></div></div>
+          </div>
+          <div class="form-actions"><button type="button" class="btn" id="profile-reset">Reset</button><button type="submit" class="btn btn-primary">Save profile</button></div>
+        </form>
+      </div>
+
+      <div class="settings-section">
+        <div><h3>Change password</h3><p class="desc">Use a unique password you don’t use elsewhere.</p></div>
+        <form id="password-form" novalidate>
+          <div class="form-grid">
+            <div class="field full"><label for="current_password">Current password</label>
+              <div class="pw"><input class="input" id="current_password" name="current_password" type="password" autocomplete="current-password"><button type="button" class="toggle-pw" aria-label="Show password"><i data-lucide="eye"></i></button></div><div class="field-error"></div></div>
+            <div class="field"><label for="new_password">New password</label>
+              <div class="pw"><input class="input" id="new_password" name="new_password" type="password" autocomplete="new-password"><button type="button" class="toggle-pw" aria-label="Show password"><i data-lucide="eye"></i></button></div>
+              <div class="field-hint">8+ characters with a letter and a number.</div><div class="field-error"></div></div>
+            <div class="field"><label for="confirm_password">Confirm new password</label>
+              <div class="pw"><input class="input" id="confirm_password" name="confirm_password" type="password" autocomplete="new-password"><button type="button" class="toggle-pw" aria-label="Show password"><i data-lucide="eye"></i></button></div><div class="field-error"></div></div>
+          </div>
+          <div class="form-actions"><button type="submit" class="btn btn-primary">Update password</button></div>
+        </form>
+      </div>
+    </section>
+  </main>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/profile.js"></script>
+</body>
+</html>

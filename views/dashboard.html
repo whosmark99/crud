@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard · Laptop Inventory Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>try{var t=localStorage.getItem('theme')||'light';if(t==='system')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563EB'/%3E%3Cpath d='M9 10h14v9H9z M6 22h20' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body data-page="dashboard">
+  <main id="page" class="page">
+    <div class="page-head">
+      <div><h1 id="greeting">Dashboard</h1><p>Here’s what’s happening with your laptop inventory.</p></div>
+      <div class="head-actions"><a class="btn btn-primary" href="/inventory?add=1"><i data-lucide="circle-plus"></i> Add laptop</a></div>
+    </div>
+
+    <section class="stats-grid" id="stats" aria-label="Inventory summary">
+      <div class="card stat-card accent-primary"><div class="stat-icon"></div><div><span class="skeleton" style="width:60px;height:26px"></span></div></div>
+      <div class="card stat-card accent-success"><div class="stat-icon"></div><div><span class="skeleton" style="width:60px;height:26px"></span></div></div>
+      <div class="card stat-card accent-violet"><div class="stat-icon"></div><div><span class="skeleton" style="width:60px;height:26px"></span></div></div>
+      <div class="card stat-card accent-warning"><div class="stat-icon"></div><div><span class="skeleton" style="width:60px;height:26px"></span></div></div>
+      <div class="card stat-card accent-danger"><div class="stat-icon"></div><div><span class="skeleton" style="width:60px;height:26px"></span></div></div>
+    </section>
+
+    <section class="grid-2" style="grid-template-columns:1fr">
+      <div class="card">
+        <div class="card-head"><h2>Laptop inventory by brand</h2></div>
+        <div class="chart-box"><canvas id="chart-brand" aria-label="Bar chart of laptops by brand" role="img"></canvas></div>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <div class="card">
+        <div class="card-head"><h2>Monthly inventory activity</h2><small>Last 6 months</small></div>
+        <div class="chart-box"><canvas id="chart-activity" aria-label="Line chart of monthly inventory activity" role="img"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>Recent laptop activity</h2></div>
+        <ul class="activity-list" id="activity"><li><span class="skeleton" style="width:100%"></span></li></ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head" style="padding-bottom:16px"><h2>Recently added laptops</h2><a class="btn btn-sm" href="/inventory">View all</a></div>
+      <div class="table-wrap">
+        <table class="data">
+          <thead><tr><th>Laptop name</th><th>Brand</th><th>Model</th><th>Serial number</th><th>Status</th><th>Date added</th><th class="actions">Action</th></tr></thead>
+          <tbody id="recent-body"><tr><td colspan="7"><span class="skeleton"></span></td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/charts.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

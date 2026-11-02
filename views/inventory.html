@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laptop Inventory · Laptop Inventory Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>try{var t=localStorage.getItem('theme')||'light';if(t==='system')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563EB'/%3E%3Cpath d='M9 10h14v9H9z M6 22h20' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body data-page="inventory">
+  <main id="page" class="page">
+    <div class="page-head">
+      <div><h1>Laptop inventory</h1><p>Search, filter and manage every laptop in stock.</p></div>
+      <div class="head-actions"><button class="btn btn-primary" id="btn-add"><i data-lucide="circle-plus"></i> Add laptop</button></div>
+    </div>
+
+    <section class="card">
+      <div class="toolbar">
+        <div class="search"><i data-lucide="search"></i><input class="input" id="search" type="search" placeholder="Search name, model, serial, processor…" aria-label="Search laptops" maxlength="100" autocomplete="off"></div>
+        <select class="select" id="f-brand" aria-label="Filter by brand"><option value="">All brands</option></select>
+        <select class="select" id="f-category" aria-label="Filter by category"><option value="">All categories</option></select>
+        <select class="select" id="f-status" aria-label="Filter by status">
+          <option value="">All statuses</option><option>Available</option><option>Borrowed</option><option>Maintenance</option><option>Out of Stock</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table class="data minimal">
+          <thead>
+            <tr>
+              <th data-sort="name" style="cursor:pointer" aria-sort="none">Laptop <span class="sort-ind"></span></th>
+              <th data-sort="brand" style="cursor:pointer" aria-sort="none">Brand <span class="sort-ind"></span></th>
+              <th>Processor</th>
+              <th>RAM</th>
+              <th>Storage</th>
+              <th data-sort="price" class="num" style="cursor:pointer" aria-sort="none">Price <span class="sort-ind"></span></th>
+              <th>Status</th>
+              <th class="actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <span id="page-info"></span>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+          <label class="cell-sub" style="display:flex;gap:8px;align-items:center">Rows
+            <select class="select" id="page-size" style="width:auto;height:34px"><option>10</option><option>25</option><option>50</option><option>100</option></select>
+          </label>
+          <div class="pager" id="pager"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Add / Edit modal (one reusable component) -->
+  <div class="modal-overlay" data-static="1" id="laptop-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <form class="modal form-card" id="laptop-form" novalidate>
+      <div class="modal-body">
+        <div class="fc-head">
+          <h2 id="modal-title">Add New Laptop</h2>
+          <span class="fc-icon" id="modal-icon" aria-hidden="true"></span>
+        </div>
+        <p class="fc-sub" id="modal-sub">Enter the laptop information below.</p>
+        <div class="form-grid">
+          <div class="field full">
+            <label for="image-input">Laptop Image</label>
+            <label class="upload" id="upload-drop" for="image-input">
+              <div class="preview" id="img-preview"></div>
+              <div style="flex:1;min-width:0"><strong>Click to upload or drag an image here</strong><small>JPG, PNG, WEBP or GIF · up to 3 MB</small></div>
+              <button type="button" class="btn btn-sm btn-pill" id="remove-img" hidden>Remove</button>
+              <input type="file" id="image-input" name="image" accept="image/jpeg,image/png,image/webp,image/gif">
+            </label>
+            <div class="field-error"></div>
+          </div>
+          <div class="field"><label for="laptop_name">Laptop Name</label><input class="input" id="laptop_name" name="laptop_name" maxlength="120" placeholder="e.g. ThinkPad E14" autocomplete="off"><div class="field-error"></div></div>
+          <div class="field"><label for="brand_id">Brand</label><select class="select" id="brand_id" name="brand_id"></select><div class="field-error"></div></div>
+          <div class="field"><label for="processor">Processor</label><input class="input" id="processor" name="processor" maxlength="100" placeholder="e.g. Intel Core i5" autocomplete="off"><div class="field-error"></div></div>
+          <div class="field"><label for="ram">RAM</label><select class="select" id="ram" name="ram"></select><div class="field-error"></div></div>
+          <div class="field"><label for="storage">Storage</label><input class="input" id="storage" name="storage" maxlength="60" placeholder="e.g. 512GB SSD" autocomplete="off"><div class="field-error"></div></div>
+          <div class="field"><label for="status">Status</label>
+            <select class="select" id="status" name="status"><option value="">Select status</option><option>Available</option><option>Borrowed</option><option>Maintenance</option><option>Out of Stock</option></select><div class="field-error"></div></div>
+          <div class="field full"><label for="price">Price</label><input class="input" id="price" name="price" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 45000" autocomplete="off"><div class="field-error"></div></div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn btn-pill" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn-pill btn-dark" id="save-btn"><span id="save-icon"></span><span id="save-label">Save Laptop</span></button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Details modal -->
+  <div class="modal-overlay" id="view-modal" role="dialog" aria-modal="true" aria-label="Laptop details" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-head"><h2>Laptop details</h2><button type="button" class="modal-close" data-close-modal aria-label="Close">&times;</button></div>
+      <div class="modal-body" id="view-body"></div>
+      <div class="modal-foot">
+        <button type="button" class="btn" data-close-modal>Close</button>
+        <button type="button" class="btn btn-primary" id="view-edit"><i data-lucide="pencil"></i> Edit laptop</button>
+      </div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/laptops.js"></script>
+</body>
+</html>

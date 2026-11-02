@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brands · Laptop Inventory Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>try{var t=localStorage.getItem('theme')||'light';if(t==='system')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563EB'/%3E%3Cpath d='M9 10h14v9H9z M6 22h20' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body data-page="brands">
+  <main id="page" class="page">
+    <div class="page-head">
+      <div><h1>Brands</h1><p>Manage the brands available when adding laptops. <span id="count" class="cell-sub"></span></p></div>
+      <div class="head-actions"><button class="btn btn-primary" id="btn-add"><i data-lucide="circle-plus"></i> Add brand</button></div>
+    </div>
+    <section class="card">
+      <div class="toolbar">
+        <div class="search"><i data-lucide="search"></i><input class="input" id="filter" type="search" placeholder="Search brands…" aria-label="Search brands" autocomplete="off"></div>
+      </div>
+      <div class="table-wrap">
+        <table class="data">
+          <thead><tr><th>Name</th><th>In use by</th><th>Created</th><th class="actions">Actions</th></tr></thead>
+          <tbody id="tbody"><tr><td colspan="4"><span class="skeleton"></span></td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="name-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <form class="modal sm" id="name-form" novalidate>
+      <div class="modal-head"><h2 id="modal-title">Add brand</h2><button type="button" class="modal-close" data-close-modal aria-label="Close">&times;</button></div>
+      <div class="modal-body">
+        <div class="field"><label for="name">Brand name <span class="req">*</span></label><input class="input" id="name" name="name" maxlength="60" autocomplete="off"><div class="field-error"></div></div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn" data-close-modal>Cancel</button>
+        <button type="submit" class="btn btn-primary" id="save-btn"><span id="save-label">Add brand</span></button>
+      </div>
+    </form>
+  </div>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/manage.js"></script>
+</body>
+</html>

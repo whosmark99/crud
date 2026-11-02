@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · Laptop Inventory Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>try{var t=localStorage.getItem('theme')||'light';if(t==='system')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563EB'/%3E%3Cpath d='M9 10h14v9H9z M6 22h20' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/auth.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body class="auth">
+  <button class="icon-btn auth-theme" id="theme-toggle" aria-label="Toggle dark mode"></button>
+  <main class="auth-card">
+    <div class="auth-logo"><div class="brand-mark"><i data-lucide="laptop"></i></div><div><strong>Laptop Inventory Management</strong><span>Track every device in one place</span></div></div>
+    <h1>Sign in</h1>
+    <p class="lead">Welcome back. Enter your details to continue.</p>
+    <form class="auth-form" id="auth-form" data-mode="login" novalidate>
+      <div class="field"><label for="identifier">Username or email</label><input class="input" id="identifier" name="identifier" autocomplete="username" placeholder="Your username or email" autofocus><div class="field-error"></div></div>
+      
+      <!-- Removed the pw wrapper and custom button here -->
+      <div class="field">
+        <label for="password">Password</label>
+        <input class="input" id="password" name="password" type="password" autocomplete="current-password" placeholder="Your password">
+        <div class="field-error"></div>
+      </div>
+      
+      <div class="auth-row"><label class="checkbox"><input type="checkbox" name="remember"> Remember me</label></div>
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </form>
+    <p class="auth-foot">New here? <a href="/register">Create an account</a></p>
+  </main>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/js/auth.js"></script>
+  <script>window.lucide && window.lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reports · Laptop Inventory Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>try{var t=localStorage.getItem('theme')||'light';if(t==='system')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563EB'/%3E%3Cpath d='M9 10h14v9H9z M6 22h20' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body data-page="reports">
+  <main id="page" class="page">
+    <div class="page-head">
+      <div><h1>Reports</h1><p>Review stock by status and value, then export to CSV.</p></div>
+      <div class="head-actions"><button class="btn btn-primary" id="export-btn"><i data-lucide="download"></i> Export CSV</button></div>
+    </div>
+
+    <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <div class="segmented" id="report-tabs" role="tablist" style="flex-wrap:wrap">
+        <button class="active" data-type="inventory" role="tab">Total inventory</button>
+        <button data-type="available" role="tab">Available</button>
+        <button data-type="borrowed" role="tab">Borrowed</button>
+        <button data-type="maintenance" role="tab">Maintenance</button>
+        <button data-type="value" role="tab">Inventory value</button>
+      </div>
+      <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
+        <div class="field"><label for="from">Added from</label><input class="input" type="date" id="from"></div>
+        <div class="field"><label for="to">Added to</label><input class="input" type="date" id="to"></div>
+        <button class="btn" id="run-btn"><i data-lucide="filter"></i> Apply</button>
+        <button class="btn btn-ghost" id="clear-btn">Clear</button>
+      </div>
+    </div>
+
+    <section class="summary-grid">
+      <div class="card"><span>Records</span><strong id="sum-records">—</strong></div>
+      <div class="card"><span>Total units</span><strong id="sum-units">—</strong></div>
+      <div class="card"><span>Total value</span><strong id="sum-value">—</strong></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head" style="padding-bottom:16px"><h2 id="report-title">Total inventory report</h2></div>
+      <div class="table-wrap">
+        <table class="data" style="min-width:760px">
+          <thead><tr><th>Laptop</th><th>Brand</th><th>Status</th><th class="num">Qty</th><th class="num">Unit price</th><th class="num">Total value</th><th>Date added</th></tr></thead>
+          <tbody id="report-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/reports.js"></script>
+</body>
+</html>
